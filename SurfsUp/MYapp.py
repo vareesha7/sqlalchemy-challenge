@@ -61,7 +61,9 @@ def precipitation():
     results = (session.query(Measurement.date, Measurement.prcp)
                       .order_by(Measurement.date))
     
- 
+    #close the session 
+    session.close()
+
  # Create a dictionary
     precipitation_date_tobs = []
     for each_row in results:
@@ -83,6 +85,9 @@ def stations():
 
     # Query Stations
     results = session.query(Station.name).all()
+
+     #close the session 
+    session.close()
 
     # Convert list of tuples into normal list
     station_details = list(np.ravel(results))
@@ -115,6 +120,8 @@ def tobs():
     station_hno = q_station_list[0][0]
     print(station_hno)
 
+     #close the session 
+    session.close()
 
     # Return a list of tobs for the year before the final date
     results = (session.query(Measurement.station, Measurement.date, Measurement.tobs)
